@@ -1,0 +1,55 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>NBA Prediction</title>
+        <style>
+            body {
+                font-family: Montserrat, Gagalin;
+                background-color: #f7c63e;
+                display: flex;
+                justify-content: center; /* Center horizontally */
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                width: 80%;
+                margin: 0 auto;
+            }
+            h1 {
+                color: #333;
+                text-align: center; /* Center the title */
+                font-size: 32px; /* Larger font size */
+                margin-bottom: 20px; /* Add some spacing below the title */
+            }
+            form {
+                text-align: right;
+            }
+            input[type="text"] {
+                width: 300px; /* Enlarge the search bar */
+                padding: 10px;
+                font-size: 16px;
+            }
+            input[type="submit"] {
+                font-size: 16px;
+            }
+
+                
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="left-section">
+                <center><img src="https://img.freepik.com/premium-vector/basketball-slam-dunk-flame-silhouette-player_9245-115.jpg" alt="centered image" height="400" width="398"></center> 
+            </div>
+            <div class="right-section">
+                <h1>Dribble, Drive, Dominate.</h1>
+                <form method="POST" action="/predict">
+                    <input type="text" name="player_name" placeholder="Enter player's name">
+                </form>
+            </div>
+        </div>
+    </body>
+    </html>
