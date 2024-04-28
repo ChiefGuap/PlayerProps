@@ -54,18 +54,19 @@ def home():
 # Define the prediction route
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Example player name input by the user
-    player_name = get_names()  # Change to USER INPUT/function arguments!!!
-
+    # Read the form data
+    player_name = request.form.get('name') # 'name' corresponds to the input ID in your HTML form
+    #return f"Received input: {player_name}"  # Return or process the input as needed
+   
     if player_name not in player_mapping["PLAYER"].values:
             return jsonify({"error": "Player not found"}), 404
 
-    # Find the encoded value for the given player name
+    # # Find the encoded value for the given player name
     player_encoded = player_mapping[player_mapping["PLAYER"] == player_name].index[0]  # Get the encoded value
 
     averages = pd.read_csv('average_values.csv')
 
-    # Features used in the model
+     # Features used in the model
     features = ['MIN', 'FGM', 'FGA', 'FTM', 'FTA', 'EFF', 'TOV', 'AST', 'FG3A', 'FG3M', 'DREB']
 
     # Extract the row for the specified player (after correction)
@@ -75,8 +76,9 @@ def predict():
     row_features_df = pd.DataFrame([row], columns=features)  # Single-row DataFrame with feature names
 
     # Predict using the model
-    prediction = model.predict(row_features_df)
-    return jsonify({"prediction": float(prediction[0])})
+    prediction = model.predict(row_features_df).round(3)
+    # Format the output to include the player name and prediction
+    return f"Player {player_name} will average {prediction[0]} points next season."  # Use indexing to get the first prediction
     
 
 if __name__ == '__main__':
