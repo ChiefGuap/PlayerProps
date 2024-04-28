@@ -1,55 +1,187 @@
+<!DOCTYPE html>
+<html>
+<style>
+ @import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@900&display=swap');
 
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>NBA Prediction</title>
-        <style>
-            body {
-                font-family: Montserrat, Gagalin;
-                background-color: #f7c63e;
-                display: flex;
-                justify-content: center; /* Center horizontally */
-                align-items: center;
-                height: 100vh;
-                margin: 0;
-                padding: 0;
-            }
-            .container {
-                width: 80%;
-                margin: 0 auto;
-            }
-            h1 {
-                color: #333;
-                text-align: center; /* Center the title */
-                font-size: 32px; /* Larger font size */
-                margin-bottom: 20px; /* Add some spacing below the title */
-            }
-            form {
-                text-align: right;
-            }
-            input[type="text"] {
-                width: 300px; /* Enlarge the search bar */
-                padding: 10px;
-                font-size: 16px;
-            }
-            input[type="submit"] {
-                font-size: 16px;
-            }
+header {
+  height: 200vh;
+}
 
-                
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="left-section">
-                <center><img src="https://img.freepik.com/premium-vector/basketball-slam-dunk-flame-silhouette-player_9245-115.jpg" alt="centered image" height="400" width="398"></center> 
-            </div>
-            <div class="right-section">
-                <h1>Dribble, Drive, Dominate.</h1>
-                <form method="POST" action="/predict">
-                    <input type="text" name="player_name" placeholder="Enter player's name">
-                </form>
-            </div>
+.container {
+  /* hide fixed overflow contents */
+  clip: rect(0, auto, auto, 0);
+
+  /* does not work if overflow = visible */
+  overflow: hidden;
+
+  /* only works with absolute positioning */
+  position: absolute;
+
+  /* Make sure containers are full-width and height */
+  height: 100vh;
+  left: 0;
+  width: 100%;
+  
+  
+  /* safari hack */
+  -webkit-mask-image: -webkit-linear-gradient(top, #ffffff 0%,#ffffff 100%);
+}
+
+.container_solid {
+  background: white;
+  
+  /* position this container at the top of its parent element */
+  top: 0;
+}
+
+.title_wrapper {
+  position: fixed;
+  display: block;  
+  margin: auto;
+  width: 100%;
+  /* center the text wrapper vertically */
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.title_wrapper h1 {
+  text-align: center;
+  font-size: 64px;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+}
+
+.container_solid .title_wrapper h1 {
+  /* the text background */
+  background: url(https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-size: 100vw auto;
+  background-position: center;
+  
+  /* clip the text is possible */
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  
+  /* fallback text color */
+  color: black;
+}
+
+.container_image {
+  /* Grab a free image from unsplash */
+  background-image: url(https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-size:100vw auto;
+  background-position: center;
+  background-attachment: fixed;
+  
+  /* position the second container below the first container */
+  top: 100vh;
+}
+
+.container_image .title_wrapper h1 {
+  color: white;
+}
+
+section {
+  min-height: 100vh;
+  padding: 2em;
+  margin: auto;
+  max-width: 800px;
+}
+
+section h2 {
+  font-family: 'Fraunces', serif;
+}
+
+section p {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.form__label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  margin-left: 2rem;
+  margin-top: 0.7rem;
+  display: block;
+  transition: all 0.3s;
+  transform: translateY(0rem);
+  justify-content: center;
+}
+
+.form__input {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  font-size: 1.2rem;
+	margin: 0 auto;
+  padding: 1.5rem 2rem;
+  border-radius: 0.2rem;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  width: 90%;
+  display: block;
+  border-bottom: 0.3rem solid transparent;
+  transition: all 0.3s;
+  justify-content: center;
+}
+
+.form__input:placeholder-shown + .form__label {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translateY(-4rem);
+  transform: translateY(-4rem);
+  justify-content: center;
+}
+
+
+    </style>
+<header>
+
+    <!-- First container -->
+    <div class="container container_solid">
+      <div class="title_wrapper">
+        <h1>Dribble, Drive, Dominate</h1>
+      </div>
+    </div>
+  
+    <!-- Second container -->
+    <div class="container container_image" aria-hidden="true">
+      <div class="title_wrapper">
+        <h1>Player Props</h1>
+      </div>
+    </div>
+  
+  </header>
+  
+  <section>
+    <h2>Next-Gen Stats Aimed for Greatness</h2>
+    <p>This project is created for the 2024 HackDavis competiton and the intetnion of this web application is to give insight on the game of basketball and really analyzing in depth,the significance of scoring and how scoring is measured in the NBA. Through looking at different stats within the game of basketball, we figured out a way to predict a players points based on the previous few seasons as well as thier playoff preformance</p>
+    <p>
+      Analyzing NBA statistics to predict future points per game for players can have positive social impacts in several ways:
+    </p>
+    <p>
+      By understanding which statistics correlate with higher points per game (PPG), teams can tailor their training programs and strategies to enhance player performance.
+  Coaches can identify areas for improvement, such as shooting accuracy, assists, or free throw percentage, leading to better player development.
+      
+      Teams can make informed decisions during drafts, trades, and contract negotiations.
+  Predictive models help teams assess a player's potential impact on PPG, aiding fair compensation and team-building decisions. Futhermore, Accurate predictions enhance fan engagement by creating excitement around player performances. Finally, Fans enjoy discussing stats, predictions, and fantasy leagues, contributing to the overall enjoyment of the sport.
+    </p>
+    <br>
+    <br>
+    <br>
+    <h2>Try it out with your favorite current NBA Player:</h2>
+
+    <form method="POST" action="/predict">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <div class="form__group">
+            <input type="text" class="form__input" id="name" placeholder="Enter Player Name" required="" />
+            <label for="name" class="form__label">Player's Full Name</label>
         </div>
-    </body>
-    </html>
+    </form>
+  </section>
+
+</html>
+
