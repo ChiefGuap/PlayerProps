@@ -78,8 +78,10 @@ def predict():
     # Predict using the model
     prediction = model.predict(row_features_df).round(3)
     # Format the output to include the player name and prediction
-    return f"Player {player_name} will average {prediction[0]} points next season."  # Use indexing to get the first prediction
-    
+    result = f"Player {player_name} will average {prediction[0]} points next season."  # Use indexing to get the first prediction
+    return render_template("predict.html", result = result)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
